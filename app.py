@@ -71,7 +71,7 @@ if __name__ == '__main__':
     parser.add_argument("-p", "--port", type=int, default=8080)
     args = parser.parse_args()
 
-    start_server(predict, port=args.port)
+    start_server(model_predict, port=args.port)
 
 #app.run(host='localhost', port=80, debug=True)
 #visit http://localhost/tool to open the PyWebIO application.
