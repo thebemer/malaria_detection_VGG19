@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'malaria-detection'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_3d8f4739b673446c9efed1cf03e58b0d }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_accf5e9c7ac64528a8ee10d99aa74b3e }}
