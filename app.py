@@ -1,4 +1,5 @@
 from __future__ import division, print_function
+# coding=utf-8
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import numpy as np
@@ -6,9 +7,9 @@ import time
 
 # Keras
 import tensorflow as tf
-from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+from tensorflow.keras.preprocessing.image import load_img 
 
 # Flask utils
 from flask import Flask, redirect, url_for, request, send_from_directory
@@ -47,12 +48,12 @@ def model_predict():
         x = image.img_to_array(img1)
         x=x/255
         x = np.expand_dims(x, axis=0)
-                
+
+               
         put_processbar('bar')
         for i in range(1, 11):
             set_processbar('bar', i / 10)
             time.sleep(0.1)
-
         model.predict(x)
 
         if model.predict(x) > 0.5:
@@ -65,12 +66,13 @@ def model_predict():
 app.add_url_rule('/tool', 'webio_view', webio_view(model_predict),
             methods=['GET', 'POST', 'OPTIONS'])
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--port", type=int, default=8080)
-    args = parser.parse_args()
+#Uncomment this for deployment in cloud
+#if __name__ == '__main__':
+#   parser = argparse.ArgumentParser()
+#   parser.add_argument("-p", "--port", type=int, default=8080)
+#   args = parser.parse_args()
 
-    start_server(model_predict, port=args.port)
+#   start_server(model_predict, port=args.port)
 
-#app.run(host='localhost', port=80, debug=True)
+app.run(host='localhost', port=80, debug=True)
 #visit http://localhost/tool to open the PyWebIO application.
